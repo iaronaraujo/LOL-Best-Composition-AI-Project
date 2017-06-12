@@ -1,30 +1,35 @@
 package com.example.project;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.example.project.crawlers.MatchupCrawler;
+import com.example.project.crawlers.URLLoader;
 import com.example.project.heroes.Hero;
 import com.example.project.heroes.HeroFactory;
 import com.example.project.heroes.HeroList;
+import com.example.project.heroes.MatchupType;
+import com.example.project.heroes.Position;
 
 
 public class Maintest {
 
 	public static void main(String[] args) {
-		//loadUrl();
-		//Position a = Position.ADC;
-		//System.out.println(a.getValue());
+		
+		//System.out.println(URLLoader.loadUrl("http://matchup.gg/matchup/Zed/Ahri/MID"));		
 		HeroList heroList = getAllHeroes();
-		System.out.println(heroList.toString());
+		List<Hero> midlist = heroList.getHeroesByPosition(Position.MID);
+		List<Hero> toplist = heroList.getHeroesByPosition(Position.TOP);
+		Hero hero1 = midlist.get(0);
+		Hero hero2 = midlist.get(1);
+		Hero hero3 = toplist.get(0);
+		MatchupCrawler crawler = new MatchupCrawler();
+		crawler.getMatchupValue(hero1, hero2, MatchupType.GENERAL);
+		//System.out.println(heroList.toString());
 	}
 	
 	private static HeroList getAllHeroes(){
@@ -57,7 +62,7 @@ public class Maintest {
 	}
 	
 	private static Elements getHeroTable(){
-		String html = loadUrl();
+		String html = URLLoader.loadUrl("http://champion.gg/");
 		Document doc = Jsoup.parse(html);
 		Element body = doc.body();
 		Elements primaryhue = body.getElementsByClass("primary-hue");
@@ -75,36 +80,6 @@ public class Maintest {
 		String[] split = link.split("/");
 		String nameOrPos = split[split.length-1];
 		return nameOrPos;
-	}
-	
-	private static String loadUrl(){
-		URL url;
-	    InputStream is = null;
-	    BufferedReader br;
-	    String line;
-	    StringBuffer html = new StringBuffer();
-
-	    try {
-	        url = new URL("http://champion.gg/");
-	        is = url.openStream();  // throws an IOException
-	        br = new BufferedReader(new InputStreamReader(is));
-
-	        while ((line = br.readLine()) != null) {
-	            //System.out.println(line);
-	            html.append(line);
-	        }
-	    } catch (MalformedURLException mue) {
-	         mue.printStackTrace();
-	    } catch (IOException ioe) {
-	         ioe.printStackTrace();
-	    } finally {
-	        try {
-	            if (is != null) is.close();
-	        } catch (IOException ioe) {
-	            // nothing to see here
-	        }
-	    }
-	    return html.toString();
 	}
 
 }
