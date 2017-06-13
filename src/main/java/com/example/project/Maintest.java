@@ -20,15 +20,15 @@ public class Maintest {
 
 	public static void main(String[] args) {
 		
-		//System.out.println(URLLoader.loadUrl("http://matchup.gg/matchup/Zed/Ahri/MID"));		
-		HeroList heroList = getAllHeroes();
+		System.out.println(URLLoader.loadUrl("http://matchup.gg/matchup/Zed/Ahri/MID"));		
+		/*HeroList heroList = getAllHeroes();
 		List<Hero> midlist = heroList.getHeroesByPosition(Position.MID);
 		List<Hero> toplist = heroList.getHeroesByPosition(Position.TOP);
 		Hero hero1 = midlist.get(0);
 		Hero hero2 = midlist.get(1);
 		Hero hero3 = toplist.get(0);
 		MatchupCrawler crawler = new MatchupCrawler();
-		crawler.getMatchupValue(hero1, hero2, MatchupType.GENERAL);
+		crawler.getMatchupValue(hero1, hero2, MatchupType.GENERAL);*/
 		//System.out.println(heroList.toString());
 	}
 	
