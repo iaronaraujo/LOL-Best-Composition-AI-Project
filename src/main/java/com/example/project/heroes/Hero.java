@@ -3,10 +3,10 @@ package com.example.project.heroes;
 public class Hero {
 	
 	private String name;
-	private Position position;
+	private Role position;
 	private int id;
 	
-	public Hero(String name, Position position, int id){
+	public Hero(String name, Role position, int id){
 		this.name = name;
 		this.position = position;
 		this.id = id;
@@ -16,7 +16,7 @@ public class Hero {
 		return name;
 	}
 
-	public Position getPosition() {
+	public Role getPosition() {
 		return position;
 	}
 	

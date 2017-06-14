@@ -13,7 +13,7 @@ import com.example.project.heroes.Hero;
 import com.example.project.heroes.HeroFactory;
 import com.example.project.heroes.HeroList;
 import com.example.project.heroes.MatchupType;
-import com.example.project.heroes.Position;
+import com.example.project.heroes.Role;
 
 
 public class Maintest {
@@ -22,8 +22,8 @@ public class Maintest {
 		
 		//System.out.println(URLLoader.loadUrl("http://matchup.gg/matchup/Zed/Ahri/MID"));		
 		HeroList heroList = getAllHeroes();
-		List<Hero> midlist = heroList.getHeroesByPosition(Position.MID);
-		List<Hero> toplist = heroList.getHeroesByPosition(Position.TOP);
+		List<Hero> midlist = heroList.getHeroesByPosition(Role.MID);
+		List<Hero> toplist = heroList.getHeroesByPosition(Role.TOP);
 		Hero hero1 = midlist.get(0);
 		Hero hero2 = midlist.get(1);
 		Hero hero3 = toplist.get(0);

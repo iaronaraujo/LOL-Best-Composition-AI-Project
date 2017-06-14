@@ -18,7 +18,7 @@ public class HeroList {
 		heroes.get(heroPosition).add(hero);
 	}
 	
-	public List<Hero> getHeroesByPosition(Position position){
+	public List<Hero> getHeroesByPosition(Role position){
 		return heroes.get(position.getValue());
 	}
 	

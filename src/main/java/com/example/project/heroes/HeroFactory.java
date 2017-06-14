@@ -10,18 +10,18 @@ public class HeroFactory {
 		return new Hero(name, nameToPosition(position), id);
 	}
 	
-	public Position nameToPosition(String position){
-		Position pos = null;
+	public Role nameToPosition(String position){
+		Role pos = null;
 		if(position.equals("Middle")){
-			pos = Position.MID;
+			pos = Role.MID;
 		} else if (position.equals("Top")){
-			pos = Position.TOP;
+			pos = Role.TOP;
 		} else if (position.equals("ADC")){
-			pos = Position.ADC;
+			pos = Role.ADC;
 		} else if (position.equals("Support")){
-			pos = Position.SUP;
+			pos = Role.SUP;
 		} else if (position.equals("Jungle")){
-			pos = Position.JUN;
+			pos = Role.JUN;
 		}
 		return pos;
 	}
