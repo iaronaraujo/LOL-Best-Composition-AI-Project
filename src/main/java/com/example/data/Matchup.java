@@ -1,5 +1,7 @@
 package com.example.data;
 
+
+
 public class Matchup {
 	private long numberOfMatchups;
 	private String patch;

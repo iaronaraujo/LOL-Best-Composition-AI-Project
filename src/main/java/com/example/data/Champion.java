@@ -2,16 +2,16 @@ package com.example.data;
 
 import java.util.Arrays;
 
-import com.example.project.heroes.Role;
-
 public class Champion {
 	private long id;
 	private String name;
-	private Role[] roles;
+	private double banRate;
+	private RoleInfo[] roles;
 	
-	public Champion(long id, String name, Role[] roles) {
+	public Champion(long id, String name, double banRate, RoleInfo[] roles) {
 		this.id = id;
 		this.name = name;
+		this.banRate = banRate;
 		this.roles = roles;
 	}
 
@@ -23,8 +23,12 @@ public class Champion {
 		return name;
 	}
 
-	public Role[] getRoles() {
+	public RoleInfo[] getRoles() {
 		return roles;
+	}
+	
+	public double getBanRate() {
+		return banRate;
 	}
 
 	@Override

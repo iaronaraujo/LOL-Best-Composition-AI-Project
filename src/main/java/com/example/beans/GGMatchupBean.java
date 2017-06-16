@@ -7,13 +7,21 @@ public class GGMatchupBean {
 	
 	private long champ1_id;
 	private long champ2_id;
+	
 	private ChampionMatchupInfo champ1;
 	private ChampionMatchupInfo champ2;
 	
-	public GGMatchupBean(long count, ChampionMatchupInfo champ1, ChampionMatchupInfo champ2) {
+	private String type;
+	
+	public GGMatchupBean(long count, String patch, String role, long champ1_id, long champ2_id, ChampionMatchupInfo champ1, ChampionMatchupInfo champ2, String type) {
 		this.count = count;
+		this.patch = patch;
+		this.role = role;
+		this.champ1_id = champ1_id;
+		this.champ2_id = champ2_id;
 		this.champ1 = champ1;
 		this.champ2 = champ2;
+		this.type = type;
 	}
 	
 	public GGMatchupBean() {
@@ -75,14 +83,20 @@ public class GGMatchupBean {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Override
 	public String toString() {
 		return "GGMatchupBean [count=" + count + ", patch=" + patch + ", role=" + role + ", champ1_id=" + champ1_id
-				+ ", champ2_id=" + champ2_id + ", champ1=" + champ1 + ", champ2=" + champ2 + "]";
+				+ ", champ2_id=" + champ2_id + ", champ1=" + champ1 + ", champ2=" + champ2 + ", type=" + type + "]";
 	}
-
 
 	class ChampionMatchupInfo {
 		private String role;
