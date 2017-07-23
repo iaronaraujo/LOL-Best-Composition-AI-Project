@@ -8,6 +8,19 @@ public class Champion {
 	private double banRate;
 	private RoleInfo[] roles;
 	
+	public Champion(long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	
+	public Champion(long id, String name, RoleInfo[] roles) {
+		this.id = id;
+		this.name = name;
+		this.roles = roles;
+	}
+
+
 	public Champion(long id, String name, double banRate, RoleInfo[] roles) {
 		this.id = id;
 		this.name = name;
@@ -27,8 +40,16 @@ public class Champion {
 		return roles;
 	}
 	
+	public void setRoles(RoleInfo[] roles){
+		this.roles = roles;
+	}
+	
 	public double getBanRate() {
 		return banRate;
+	}
+	
+	public void setBanRate(double banRate) {
+		this.banRate = banRate;
 	}
 
 	@Override
