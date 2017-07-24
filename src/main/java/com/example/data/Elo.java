@@ -12,4 +12,8 @@ public enum Elo {
 	public String getGgApiParameter() {
 		return ggApiParameter;
 	}
+	
+	public Elo parseString(String elo) {
+		return Elo.valueOf(elo);
+	}
 }

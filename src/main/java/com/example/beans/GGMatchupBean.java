@@ -98,7 +98,7 @@ public class GGMatchupBean {
 				+ ", champ2_id=" + champ2_id + ", champ1=" + champ1 + ", champ2=" + champ2 + ", type=" + type + "]";
 	}
 
-	class ChampionMatchupInfo {
+	public class ChampionMatchupInfo {
 		private String role;
 		private double winrate;
 		

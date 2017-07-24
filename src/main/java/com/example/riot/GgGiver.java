@@ -45,7 +45,7 @@ public class GgGiver {
 		Map<GGChampionBean, List<GGMatchupBean>> matchups = new HashMap<>();
 		
 		for (Elo elo : elos) {
-			String uri = REQUEST_TYPE + "://" + GG_ENDPOINT +  "/v2/champions/43?elo=" + elo.getGgApiParameter() + "&limit=" + limit + "&champData=" + CHAMPDATA + "&api_key=" + GG_API_KEY;
+			String uri = REQUEST_TYPE + "://" + GG_ENDPOINT +  "/v2/champions?elo=" + elo.getGgApiParameter() + "&limit=" + limit + "&champData=" + CHAMPDATA + "&api_key=" + GG_API_KEY;
 			String rawResponse = template.getForObject(uri, String.class);
 			
 			JsonArray response = jsonParser.parse(rawResponse).getAsJsonArray();

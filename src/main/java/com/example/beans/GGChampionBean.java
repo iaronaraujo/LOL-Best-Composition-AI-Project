@@ -8,8 +8,10 @@ public class GGChampionBean {
 	private long gamesPlayed;
 	private String patch;
 	private String elo;
+	private double percentRolePlayed;
+	private double banRate;
 	
-	public GGChampionBean(long championId, double playRate, double winRate, String role, long gamesPlayed, String patch, String elo) {
+	public GGChampionBean(long championId, double playRate, double winRate, String role, long gamesPlayed, String patch, String elo, double percentRolePlayed) {
 		this.championId = championId;
 		this.playRate = playRate;
 		this.winRate = winRate;
@@ -18,6 +20,8 @@ public class GGChampionBean {
 		this.patch = patch;
 		this.elo = elo;
 		this.role = role;
+		this.percentRolePlayed = percentRolePlayed;
+		this.banRate = banRate;
 	}
 	
 	public GGChampionBean() {
@@ -78,6 +82,22 @@ public class GGChampionBean {
 
 	public void setElo(String elo) {
 		this.elo = elo;
+	}
+	
+	public double getPercentRolePlayed() {
+		return percentRolePlayed;
+	}
+
+	public void setPercentRolePlayed(double percentRolePlayed) {
+		this.percentRolePlayed = percentRolePlayed;
+	}
+	
+	public double getBanRate() {
+		return banRate;
+	}
+
+	public void setBanRate(double banRate) {
+		this.banRate = banRate;
 	}
 
 	@Override

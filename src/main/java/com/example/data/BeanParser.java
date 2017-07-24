@@ -12,17 +12,21 @@ import com.example.riot.RiotGiver;
 
 public class BeanParser {
 	private List<Champion> champions;
-	private Map<Champion, List<Matchup>> matchups;
+	
+	public static void main(String[] args) {
+		BeanParser parser = new BeanParser();
+		parser.parse();
+	}
 	
 	public BeanParser() {
 		
 	}
 	
-	public void parse() {
+	public List<Champion> parse() {
+		// Initializing Variables.
 		GgGiver ggGiver = GgGiver.getInstance();
 		RiotGiver riotGiver = RiotGiver.getInstance();
-		
-		champions = new ArrayList<Champion>();
+		this.champions = new ArrayList<Champion>();
 		
 		Map<GGChampionBean, List<GGMatchupBean>> ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER}, 1000000);
 		Map<Long, RiotChampionBean> riotChampions = riotGiver.retrieveChampions();
@@ -34,28 +38,47 @@ public class BeanParser {
 		}
 		
 		for (Long championId : riotChampions.keySet()) {
-			List<RoleInfo> roles = new ArrayList<>();
-			
 			for (GGChampionBean ggChampion : ggMatchups.keySet()) {
-				
-				
 				if (ggChampion.getChampionId() == championId) {
-					List<GGMatchupBean> ggChampionMatchups = ggMatchups.get(ggChampion);
-					
-					RoleInfo role = new RoleInfo(ggChampion.getRole(), ggChampion.getElo(), ggChampion.getPlayRate(), ggChampion.getWinRate());
-					
 					List<Matchup> matchups = new ArrayList<>();
 					
 					for(GGMatchupBean ggMatchup : ggMatchups.get(ggChampion)) {
+						MatchupChampion champion1 = new MatchupChampion(findChampion(ggMatchup.getChamp1_id()), ggMatchup.getChamp1().getWinrate());
+						MatchupChampion champion2 = new MatchupChampion(findChampion(ggMatchup.getChamp2_id()), ggMatchup.getChamp2().getWinrate());
 						
-						Matchup matchup = new Matchup(patch, numberOfMatchups, champion1, champion2);
+						if (champion1 != null && champion2 != null) {
+							if (champion1.getChampion().getId() == ggChampion.getChampionId()) {
+								Matchup matchup = new Matchup(ggChampion.getPatch(), ggMatchup.getCount(), champion1, champion2);
+								matchups.add(matchup);
+							} else if (champion2.getChampion().getId() == ggChampion.getChampionId()) {
+								Matchup matchup = new Matchup(ggChampion.getPatch(), ggMatchup.getCount(), champion2, champion1);
+								matchups.add(matchup);
+							} else {
+								// ERRO
+							}
+						} else {	
+							// ERRO
+						}
 					}
 					
-					List<GGMatchupBean> ggChampionMatchups = ggMatchups.get(championId);
-					List<String> ggRoles = new ArrayList<>();
-					ggRoles.add(ggChampion.getRole());
+					RoleInfo role = new RoleInfo(Role.parseString(ggChampion.getRole()), ggChampion.getElo(), ggChampion.getPlayRate(), ggChampion.getWinRate(), ggChampion.getPercentRolePlayed(), matchups);
+					Champion champion = findChampion(ggChampion.getChampionId());
+					champion.setBanRate(ggChampion.getBanRate());
+					champion.addRole(role);
 				}
 			}
 		}
+		
+		return champions;
+	}
+	
+	public Champion findChampion(Long id) {
+		for (Champion c : champions) {
+			if (c.getId() == id) {
+				return c;
+			}
+		}
+		
+		return null;
 	}
 }

@@ -12,6 +12,7 @@ public class Champion {
 	public Champion(long id, String name) {
 		this.id = id;
 		this.name = name;
+		this.roles = new ArrayList<>();
 	}
 	
 	public Champion(long id, String name, List<RoleInfo> roles) {
@@ -25,6 +26,10 @@ public class Champion {
 		this.name = name;
 		this.banRate = banRate;
 		this.roles = new ArrayList<>();
+	}
+	
+	public boolean addRole(RoleInfo roleInfo) {
+		return this.roles.add(roleInfo);
 	}
 
 	public long getId() {
