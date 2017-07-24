@@ -1,4 +1,4 @@
-package com.example.project.heroes;
+package com.example.data;
 
 public enum Role {
 	MID(0), TOP(1), ADC(2), SUP(3), JUN(4);

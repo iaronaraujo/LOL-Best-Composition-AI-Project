@@ -1,4 +1,4 @@
-package com.example.project.heroes;
+package com.example.data;
 
 public enum Elo {
 	BRONZE("BRONZE"), SILVER("SILVER"), GOLD("GOLD"), PLATINUM("PLATINUM"), HIGH_ELO("");

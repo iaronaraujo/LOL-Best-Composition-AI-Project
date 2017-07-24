@@ -1,31 +1,30 @@
 package com.example.data;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Champion {
 	private long id;
 	private String name;
 	private double banRate;
-	private RoleInfo[] roles;
+	private List<RoleInfo> roles;
 	
 	public Champion(long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 	
-	
-	public Champion(long id, String name, RoleInfo[] roles) {
+	public Champion(long id, String name, List<RoleInfo> roles) {
 		this.id = id;
 		this.name = name;
 		this.roles = roles;
 	}
 
-
 	public Champion(long id, String name, double banRate, RoleInfo[] roles) {
 		this.id = id;
 		this.name = name;
 		this.banRate = banRate;
-		this.roles = roles;
+		this.roles = new ArrayList<>();
 	}
 
 	public long getId() {
@@ -36,11 +35,11 @@ public class Champion {
 		return name;
 	}
 
-	public RoleInfo[] getRoles() {
+	public List<RoleInfo> getRoles() {
 		return roles;
 	}
 	
-	public void setRoles(RoleInfo[] roles){
+	public void setRoles(List<RoleInfo> roles){
 		this.roles = roles;
 	}
 	
@@ -54,7 +53,7 @@ public class Champion {
 
 	@Override
 	public String toString() {
-		return "Champion [id=" + id + ", name=" + name + ", roles=" + Arrays.toString(roles) + "]";
+		return "Champion [id=" + id + ", name=" + name + ", roles=" + roles + "]";
 	}
 
 	@Override

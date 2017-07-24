@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.beans.GGChampionBean;
 import com.example.beans.GGMatchupBean;
-import com.example.project.heroes.Elo;
+import com.example.data.Elo;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

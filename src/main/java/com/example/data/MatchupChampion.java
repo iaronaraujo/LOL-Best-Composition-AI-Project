@@ -1,12 +1,12 @@
 package com.example.data;
 
-import com.example.project.heroes.Role;
-
-public class MatchupChampion extends Champion {
+public class MatchupChampion {
+	private Champion champion;
 	private double winrate;
 	
-	public MatchupChampion(long id, String name, Role[] roles, double winrate) {
-		super(id, name, roles);
+	public MatchupChampion(Champion champion, double winrate) {
+		this.champion = champion;
+		this.winrate = winrate;
 	}
 
 	public double getWinrate() {
@@ -15,6 +15,14 @@ public class MatchupChampion extends Champion {
 
 	public void setWinrate(double winrate) {
 		this.winrate = winrate;
+	}
+	
+	public Champion getChampion() {
+		return champion;
+	}
+	
+	public void setChampion(Champion champion) {
+		this.champion = champion;
 	}
 
 	@Override
