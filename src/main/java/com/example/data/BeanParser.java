@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.client.HttpClientErrorException;
+
 import com.example.beans.GGChampionBean;
 import com.example.beans.GGMatchupBean;
 import com.example.beans.RiotChampionBean;
+import com.example.exceptions.GGHttpErrorException;
+import com.example.exceptions.HttpErrorException;
+import com.example.exceptions.RiotHttpErrorException;
 import com.example.riot.GgGiver;
 import com.example.riot.RiotGiver;
 
@@ -15,21 +20,40 @@ public class BeanParser {
 	
 	public static void main(String[] args) {
 		BeanParser parser = new BeanParser();
-		parser.parse();
+		try {
+			parser.parse();
+		} catch(HttpErrorException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public BeanParser() {
 		
 	}
 	
-	public List<Champion> parse() {
-		// Initializing Variables.
+	public List<Champion> parse() throws HttpErrorException {
 		GgGiver ggGiver = GgGiver.getInstance();
 		RiotGiver riotGiver = RiotGiver.getInstance();
-		this.champions = new ArrayList<Champion>();
 		
-		Map<GGChampionBean, List<GGMatchupBean>> ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER}, 1000000);
-		Map<Long, RiotChampionBean> riotChampions = riotGiver.retrieveChampions();
+		Map<Long, RiotChampionBean> riotChampions = null;
+		
+		try {
+			riotChampions = riotGiver.retrieveChampions();
+		} catch(HttpClientErrorException e) {
+			e.printStackTrace();
+			throw new RiotHttpErrorException("Error while trying to request data from riot api. " + e.getMessage());
+		}
+		
+		Map<GGChampionBean, List<GGMatchupBean>> ggMatchups = null;
+		
+		try {
+			ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER}, 1000000);
+		} catch(HttpClientErrorException e) {
+			e.printStackTrace();
+			throw new  GGHttpErrorException("Error while trying to request data from gg api. " + e.getMessage());
+		}
+		
+		this.champions = new ArrayList<Champion>();
 		
 		for (Long championId : riotChampions.keySet()) {
 			RiotChampionBean riotChampion = riotChampions.get(championId);
