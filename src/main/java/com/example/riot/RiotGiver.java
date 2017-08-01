@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class RiotGiver {
-	public static final String RIOT_API_KEY = "RGAPI-dcf78e3c-c00d-4f87-b8ee-457f45d846ef";
+	public static final String RIOT_API_KEY = "RGAPI-138eb7fb-b09a-4c94-b7a1-35fe8e83d9e3";
 	public static final String RIOT_BR_ENDPOINT = "br1.api.riotgames.com";
 	public static final String REQUEST_TYPE = "https";
 	public static final String RIOT_GET_CHAMPIONS_URI = REQUEST_TYPE + "://" + RIOT_BR_ENDPOINT + "/lol/static-data/v3/champions?api_key=" + RIOT_API_KEY;
