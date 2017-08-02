@@ -1,5 +1,9 @@
 package com.example.riot;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +21,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class GgGiver {
+	public static final String GG_FOLDER = "setup_files/GG_files/";
 	public static final String GG_API_KEY = "fc54506c86cbb45421e850737b08ec39";
 	public static final String GG_ENDPOINT = "api.champion.gg";
 	public static final String REQUEST_TYPE = "http";
@@ -24,10 +29,6 @@ public class GgGiver {
 	
 	public static final GgGiver INSTANCE = new GgGiver();
 	
-	public static void main(String[] args) {
-		GgGiver g = GgGiver.getInstance();
-		g.retrieveMatchups(new Elo[]{Elo.SILVER}, 100);
-	}
 	
 	private GgGiver() {
 		
@@ -37,18 +38,42 @@ public class GgGiver {
 		return INSTANCE;
 	}
 	
-	public Map<GGChampionBean, List<GGMatchupBean>> retrieveMatchups(Elo[] elos, long limit) {
-		RestTemplate template = new RestTemplate();
+	public void saveSetupFile(Elo[] elos, long limit){
+		try{
+			for(Elo elo : elos){
+				Writer writer = new FileWriter(GG_FOLDER + elo.getName() + ".json");
+				RestTemplate template = new RestTemplate();
+				String uri = REQUEST_TYPE + "://" + GG_ENDPOINT +  "/v2/champions?elo=" + elo.getGgApiParameter() + "&limit=" + limit + "&champData=" + CHAMPDATA + "&api_key=" + GG_API_KEY;
+				String rawResponse = template.getForObject(uri, String.class);
+				writer.write(rawResponse);
+				writer.close();
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public Map<GGChampionBean, List<GGMatchupBean>> retrieveMatchups(Elo[] elos) {
 		JsonParser jsonParser = new JsonParser();
 		Gson gson = new Gson();
 		
 		Map<GGChampionBean, List<GGMatchupBean>> matchups = new HashMap<>();
 		
 		for (Elo elo : elos) {
-			String uri = REQUEST_TYPE + "://" + GG_ENDPOINT +  "/v2/champions?elo=" + elo.getGgApiParameter() + "&limit=" + limit + "&champData=" + CHAMPDATA + "&api_key=" + GG_API_KEY;
-			String rawResponse = template.getForObject(uri, String.class);
+			BufferedReader br;
+			StringBuffer rawResponse= new StringBuffer();
+			try{
+				br = new BufferedReader(new FileReader(GG_FOLDER + elo.getName() + ".json"));
+				String line;
+				while((line = br.readLine()) != null){
+					rawResponse.append(line);
+				}
+			} catch(Exception e){
+				e.printStackTrace();
+			}
 			
-			JsonArray response = jsonParser.parse(rawResponse).getAsJsonArray();
+			JsonArray response = jsonParser.parse(rawResponse.toString()).getAsJsonArray();
 			
 			for (JsonElement responseElement : response) {			
 				GGChampionBean champion = gson.fromJson(responseElement, GGChampionBean.class);

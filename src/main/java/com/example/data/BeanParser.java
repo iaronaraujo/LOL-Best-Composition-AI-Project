@@ -31,6 +31,7 @@ public class BeanParser {
 		
 	}
 	
+	
 	public List<Champion> parse() throws HttpErrorException {
 		GgGiver ggGiver = GgGiver.getInstance();
 		RiotGiver riotGiver = RiotGiver.getInstance();
@@ -47,7 +48,7 @@ public class BeanParser {
 		Map<GGChampionBean, List<GGMatchupBean>> ggMatchups = null;
 		
 		try {
-			ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER}, 1000000);
+			ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER});
 		} catch(HttpClientErrorException e) {
 			e.printStackTrace();
 			throw new  GGHttpErrorException("Error while trying to request data from gg api. " + e.getMessage());
