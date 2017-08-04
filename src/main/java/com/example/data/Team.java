@@ -1,15 +1,12 @@
-package com.example.genetics;
+package com.example.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.data.Champion;
-import com.example.data.Role;
-
 public class Team {
 	
 	private List<Champion> champions;
-	
+
 	public Team(Champion mid, Champion top, Champion adc, Champion sup, Champion jungler) {
 		champions = new ArrayList<>();
 		champions.add(mid);
@@ -47,5 +44,15 @@ public class Team {
 		}
 		
 		return true;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return  " MID = " + champions.get(0).getName() +
+				" TOP = " + champions.get(1).getName() +
+				" ADC = " + champions.get(2).getName() +
+				" SUP = " + champions.get(3).getName() +
+				" JUN = " + champions.get(4).getName();
 	}
 }

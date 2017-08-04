@@ -9,14 +9,14 @@ import com.example.data.Role;
 import com.example.data.RoleInfo;
 
 public class ChampionsByRole {
-	
+	public static final int TEAM_SIZE = 5;
 	private List<List<Champion>> championsByRole;
 	private Random randomGenerator;
 	
 	public ChampionsByRole(){
 		randomGenerator = new Random();
 		championsByRole = new ArrayList<List<Champion>>();
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < TEAM_SIZE; i++){
 			championsByRole.add(new ArrayList<Champion>());
 		}
 	}
@@ -27,10 +27,14 @@ public class ChampionsByRole {
 		}
 	}
 	
-	public Champion getRandomChampion(Role role){
-		List<Champion> list = championsByRole.get(role.getValue());
+	public Champion getRandomChampion(int position){
+		List<Champion> list = championsByRole.get(position);
 		int i = randomGenerator.nextInt(list.size());
 		return list.get(i);		
+	}
+	
+	public Champion getRandomChampion(Role role){
+		return getRandomChampion(role.getValue());
 	}
 	
 	public List<Champion> getChampions(Role role){

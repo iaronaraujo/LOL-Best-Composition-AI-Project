@@ -12,7 +12,7 @@ import com.example.data.RoleInfo;
 
 public class MatchupRelations {
 	
-	public static final double NO_MATCHUP_FLAG = -10.0;
+	public static final double NO_MATCHUP_FLAG = 0.0;
 	private List<Map<Long, Map<Long, Double>>> matchupRelations;
 	
 	public MatchupRelations(List<List<Champion>> championsByRole){
