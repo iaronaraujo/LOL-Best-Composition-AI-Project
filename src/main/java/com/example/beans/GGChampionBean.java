@@ -1,27 +1,38 @@
 package com.example.beans;
 
 public class GGChampionBean {
+	private double banRate;
 	private long championId;
-	private double playRate;
-	private double winRate;
-	private String role;
+	private String elo;
 	private long gamesPlayed;
 	private String patch;
-	private String elo;
+	private double percentRolePlayed;
+	private double playRate;
+	private String role;
+	private double winRate;
 	
-	public GGChampionBean(long championId, double playRate, double winRate, String role, long gamesPlayed, String patch, String elo) {
+	public GGChampionBean(double banRate, long championId, String elo, long gamesPlayed, String patch, double playRate, double percentRolePlayed, String role, double winRate) {
+		this.banRate = banRate;
 		this.championId = championId;
-		this.playRate = playRate;
-		this.winRate = winRate;
-		this.role = role;
+		this.elo = elo;
 		this.gamesPlayed = gamesPlayed;
 		this.patch = patch;
-		this.elo = elo;
+		this.percentRolePlayed = percentRolePlayed;
+		this.playRate = playRate;
 		this.role = role;
+		this.winRate = winRate;
 	}
 	
 	public GGChampionBean() {
-		
+		this(-1.0, -1L, "NONE", -1L, "-1.0", -1.0, -1.0, "NONE", -1.0);
+	}
+
+	public double getBanRate() {
+		return banRate;
+	}
+
+	public void setBanRate(double banRate) {
+		this.banRate = banRate;
 	}
 
 	public long getChampionId() {
@@ -32,28 +43,12 @@ public class GGChampionBean {
 		this.championId = championId;
 	}
 
-	public double getPlayRate() {
-		return playRate;
+	public String getElo() {
+		return elo;
 	}
 
-	public void setPlayRate(double playRate) {
-		this.playRate = playRate;
-	}
-
-	public double getWinRate() {
-		return winRate;
-	}
-
-	public void setWinRate(double winRate) {
-		this.winRate = winRate;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public void setElo(String elo) {
+		this.elo = elo;
 	}
 
 	public long getGamesPlayed() {
@@ -72,18 +67,43 @@ public class GGChampionBean {
 		this.patch = patch;
 	}
 
-	public String getElo() {
-		return elo;
+	public double getPercentRolePlayed() {
+		return percentRolePlayed;
 	}
 
-	public void setElo(String elo) {
-		this.elo = elo;
+	public void setPercentRolePlayed(double percentRolePlayed) {
+		this.percentRolePlayed = percentRolePlayed;
+	}
+
+	public double getPlayRate() {
+		return playRate;
+	}
+
+	public void setPlayRate(double playRate) {
+		this.playRate = playRate;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public double getWinRate() {
+		return winRate;
+	}
+
+	public void setWinRate(double winRate) {
+		this.winRate = winRate;
 	}
 
 	@Override
 	public String toString() {
-		return "GGChampionBean [championId=" + championId + ", playRate=" + playRate + ", winRate=" + winRate
-				+ ", role=" + role + ", gamesPlayed=" + gamesPlayed + ", patch=" + patch + ", elo=" + elo + "]";
+		return "GGChampionBean [banRate=" + banRate + ", championId=" + championId + ", elo=" + elo + ", gamesPlayed="
+				+ gamesPlayed + ", patch=" + patch + ", percentRolePlayed=" + percentRolePlayed + ", playRate="
+				+ playRate + ", role=" + role + ", winRate=" + winRate + "]";
 	}
 
 	@Override
@@ -92,6 +112,7 @@ public class GGChampionBean {
 		int result = 1;
 		result = prime * result + (int) (championId ^ (championId >>> 32));
 		result = prime * result + ((elo == null) ? 0 : elo.hashCode());
+		result = prime * result + ((patch == null) ? 0 : patch.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
@@ -111,6 +132,11 @@ public class GGChampionBean {
 			if (other.elo != null)
 				return false;
 		} else if (!elo.equals(other.elo))
+			return false;
+		if (patch == null) {
+			if (other.patch != null)
+				return false;
+		} else if (!patch.equals(other.patch))
 			return false;
 		if (role == null) {
 			if (other.role != null)

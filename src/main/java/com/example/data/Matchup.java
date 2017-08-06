@@ -16,8 +16,16 @@ public class Matchup {
 		this.numberOfMatchups = numberOfMatchups;
 	}
 	
-	public MatchupChampion getWinner() {
-		return (champion1.getWinrate() >= champion2.getWinrate()) ? (champion1) : (champion2);
+	public Champion getWinner() {
+		return (champion1.getWinrate() >= champion2.getWinrate()) ? (champion1.getChampion()) : (champion2.getChampion());
+	}
+	
+	public double getChampion1WinRate() {
+		return champion1.getWinrate();
+	}
+	
+	public double getChampion2WinRate() {
+		return champion2.getWinrate();
 	}
 
 	public long getNumberOfMatchups() {
