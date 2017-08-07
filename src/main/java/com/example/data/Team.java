@@ -15,6 +15,10 @@ public class Team {
 		champions.add(sup);
 		champions.add(jungler);
 	}
+	
+	public Team(List<Champion> champs) {
+		champions = champs;
+	}
 
 	public Champion getChampion(Role role){
 		return champions.get(role.getValue());

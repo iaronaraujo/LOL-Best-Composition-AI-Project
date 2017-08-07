@@ -18,21 +18,13 @@ import com.example.riot.RiotGiver;
 public class BeanParser {
 	private List<Champion> champions;
 	
-	public static void main(String[] args) {
-		BeanParser parser = new BeanParser();
-		try {
-			parser.parse();
-		} catch(HttpErrorException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public BeanParser() {
 		
 	}
 	
 	
-	public List<Champion> parse() throws HttpErrorException {
+	public List<Champion> parse(Elo[] elos) throws HttpErrorException {
 		GgGiver ggGiver = GgGiver.getInstance();
 		RiotGiver riotGiver = RiotGiver.getInstance();
 		
@@ -48,7 +40,7 @@ public class BeanParser {
 		Map<GGChampionBean, List<GGMatchupBean>> ggMatchups = null;
 		
 		try {
-			ggMatchups = ggGiver.retrieveMatchups(new Elo[]{Elo.SILVER});
+			ggMatchups = ggGiver.retrieveMatchups(elos);
 		} catch(HttpClientErrorException e) {
 			e.printStackTrace();
 			throw new  GGHttpErrorException("Error while trying to request data from gg api. " + e.getMessage());

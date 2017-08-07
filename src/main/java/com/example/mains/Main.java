@@ -1,5 +1,6 @@
 package com.example.mains;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.example.data.BeanParser;
@@ -38,11 +39,12 @@ public class Main {
 	private static void runMain(){
 		
 		BeanParser parser = new BeanParser();
+		Elo[] elos = new Elo[]{Elo.HIGH_ELO};
 		
 		List<Champion> champions = null;
 		
 		try {
-			champions = parser.parse();
+			champions = parser.parse(elos);
 		} catch(HttpErrorException e) {
 			e.printStackTrace();
 		}
@@ -56,8 +58,9 @@ public class Main {
 		MatchupRelations relations = new MatchupRelations(champsByRole.getChampionsByRole());
 		
 		GeneticAlgorithm g = new GeneticAlgorithm();
-		g.startAlgorithm(champsByRole, relations, 10, 100000);
+		g.startAlgorithm(champsByRole, relations, 20, 1000000);
 		List<TeamChromossome> teams = g.getPopulation();
+		Collections.sort(teams);
 		for(TeamChromossome tc : teams){
 			System.out.println(tc.toString());
 		}
