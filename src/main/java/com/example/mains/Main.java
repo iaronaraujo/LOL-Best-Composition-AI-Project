@@ -6,9 +6,6 @@ import java.util.List;
 import com.example.data.BeanParser;
 import com.example.data.Champion;
 import com.example.data.Elo;
-import com.example.data.Matchup;
-import com.example.data.Role;
-import com.example.data.RoleInfo;
 import com.example.exceptions.HttpErrorException;
 import com.example.genetics.ChampionsByRole;
 import com.example.genetics.GeneticAlgorithm;
@@ -58,12 +55,14 @@ public class Main {
 		MatchupRelations relations = new MatchupRelations(champsByRole.getChampionsByRole());
 		
 		GeneticAlgorithm g = new GeneticAlgorithm();
-		g.startAlgorithm(champsByRole, relations, 20, 1000000);
+		g.startAlgorithm(champsByRole, relations, 20, 10000000);
 		List<TeamChromossome> teams = g.getPopulation();
 		Collections.sort(teams);
 		for(TeamChromossome tc : teams){
 			System.out.println(tc.toString());
 		}
+		
+		
 		
 	}
 

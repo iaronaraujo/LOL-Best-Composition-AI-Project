@@ -22,6 +22,7 @@ public class TeamChromossome implements Comparable<TeamChromossome>{
 	public void addFitness(double value){
 		fitness += value;
 	}
+	
 
 	
 
