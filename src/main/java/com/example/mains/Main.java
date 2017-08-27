@@ -55,15 +55,12 @@ public class Main {
 		MatchupRelations relations = new MatchupRelations(champsByRole.getChampionsByRole());
 		
 		GeneticAlgorithm g = new GeneticAlgorithm();
-		g.startAlgorithm(champsByRole, relations, 20, 10000000);
+		g.startAlgorithm(champsByRole, relations, 20, 1000);
 		List<TeamChromossome> teams = g.getPopulation();
 		Collections.sort(teams);
 		for(TeamChromossome tc : teams){
 			System.out.println(tc.toString());
 		}
-		
-		
-		
 	}
 
 }
