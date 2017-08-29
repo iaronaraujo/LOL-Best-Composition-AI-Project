@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+
+<head>
+
+    <title>LOL-BestComposition</title>
+
+    <link href="css/mainpage.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="TeamsManagement" ng-controller="GeneticAlgorithmController">
+
+    <div class="icon-bar">
+        <img src="img/lol.png">
+    </div>
+
+    <div id="startAlgorithm" class="center-block">
+        <div class="sub-block">
+            <h1>Executar algoritmo</h1>
+            <h3>Insira o tamanho da população inicial e o número de iterações para a execução</h3>
+        </div>
+        <div class="sub-block-center">
+            <form ng-submit="sendInfoJSON()">
+                <input id="init_pop" name="init_pop" ng-model="dataObj.init_pop" type="text" placeholder="População inicial"><br>
+                <input id="iterations" name="iterations" ng-model="dataObj.iterations" type="text" placeholder="Iterações"><br>
+                <button class="btn" type="submit" value="Submit" id="start">Start</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="response" class="center-block-off">
+        <div class="formation" ng-repeat="team in teams">
+            <h2 style="color:#ffffff">MID<br></h2><h5 style="color:#ffffff">{{ team.mid }}</h5>
+            <h2 style="color:#ffffff">TOP<br></h2><h5 style="color:#ffffff">{{ team.top }}</h5>
+            <h2 style="color:#ffffff">ADC<br></h2><h5 style="color:#ffffff">{{ team.adc }}</h5>
+            <h2 style="color:#ffffff">SUP<br></h2><h5 style="color:#ffffff">{{ team.sup }}</h5>
+            <h2 style="color:#ffffff">JUN<br></h2><h5 style="color:#ffffff">{{ team.jun }}</h5>
+            <h2 style="color:#ffffff">Fitness<br>{{ team.fitness }}</h2>
+        </div><hr>
+    </div>
+
+    <script>
+var start = document.getElementById("start");
+var block = document.getElementById("startAlgorithm");
+var resblock = document.getElementById("response");
+
+var app = angular.module("TeamsManagement", []);
+
+app.controller("GeneticAlgorithmController", function($scope, $http) {
+    $scope.info = [];
+    $scope.teams = [];
+
+    $scope.dataObj = {
+        init_pop : $scope.init_pop,
+        iterations : $scope.iterations
+    };
+
+    $scope.sendInfoJSON = function(){          
+
+        var method = "POST";
+        var url = "http://localhost:8080/ga/run";
+
+        $http({
+        method : method,
+        url : url,
+        data : angular.toJson($scope.dataObj),
+        headers : {
+        'Content-Type' : 'application/json'
+        }
+        }).then( _success, _error );
+
+        function _success(response) {
+            $scope.teams.push(response.data);
+            block.style.display = "none";
+            resblock.style.display = "table";
+        }
+
+        function _error(response) {
+            console.log(response.statusText);
+        }
+
+    };
+
+
+});
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+</body>
+
+</html>

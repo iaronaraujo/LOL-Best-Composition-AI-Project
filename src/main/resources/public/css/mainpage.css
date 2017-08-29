@@ -25,6 +25,18 @@ body {
     background: rgba(0,0,0,0.7);
 }
 
+.center-block-off {
+    text-align: center;
+    display: none;
+    margin-top: 70px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+    height: 430px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.7);
+}
+
 .sub-block {
     display: inline-grid;
     margin-top: 50px;
@@ -82,12 +94,21 @@ img {
     padding: 12px 0;
 }
 
+.sub-block-center {
+    display: inline-grid;
+    margin-top: 50px;
+    margin-right: 35px;
+    margin-left: 35px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
 input{
-    margin-top: 25%;
+    margin-top: 1%;
     padding: 10px 20px;
     border: solid #453614 2.5px;
     font: normal normal bold 16px/normal "Times New Roman", Times, serif;
-    color: #2b2b2b;
+    color: #000000;
     -o-text-overflow: clip;
     text-overflow: clip;
     background: rgba(193,193,193,1);
@@ -129,4 +150,22 @@ input{
     color: #ffffff;
     text-decoration: none;
     cursor: pointer;
+}
+
+.formation {
+    -webkit-column-count: 6;
+    -moz-column-count: 6;
+    column-count: 6;
+    -webkit-column-gap: 20px; 
+    -moz-column-gap: 20px; 
+    column-gap: 20px;
+    -webkit-column-rule-style: solid; 
+    -moz-column-rule-style: solid; 
+    column-rule-style: solid;
+    -webkit-column-rule-width: 1px; 
+    -moz-column-rule-width: 1px; 
+    column-rule-width: 1px;
+    -webkit-column-rule-color: lightblue; 
+    -moz-column-rule-color: lightblue;
+    column-rule-color: lightblue;
 }
