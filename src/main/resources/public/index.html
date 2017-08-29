@@ -6,7 +6,8 @@
     <title>LOL-BestComposition</title>
 
     <link href="css/mainpage.css" rel="stylesheet">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 </head>
 
 <body ng-app="TeamsManagement" ng-controller="GeneticAlgorithmController">
@@ -74,6 +75,7 @@ app.controller("GeneticAlgorithmController", function($scope, $http) {
             $scope.teams.push(response.data);
             block.style.display = "none";
             resblock.style.display = "table";
+            console.log(response.data);
         }
 
         function _error(response) {
